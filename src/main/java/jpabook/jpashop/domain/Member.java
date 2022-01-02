@@ -17,7 +17,7 @@ public class Member {
     private Long id;
 
     private String name;
-    
+
     @Embedded
     // 객체로 Column으로 사용하여 가독성 향상
     private Address address;
