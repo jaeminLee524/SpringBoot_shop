@@ -17,12 +17,12 @@ public class Member {
     private Long id;
 
     private String name;
-
+    
     @Embedded
+    // 객체로 Column으로 사용하여 가독성 향상
     private Address address;
 
-    // member필드에대한 거울 역할(readOnly)
+    // member 필드에대한 거울 역할(readOnly)
     @OneToMany(mappedBy = "member")
-    private List<Order> orderList = new ArrayList<>();
-
+    private List<Order> orders = new ArrayList<>();
 }
