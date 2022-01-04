@@ -11,7 +11,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ItemRepository {
 
-    private EntityManager em;
+    private final EntityManager em;
 
     /**
      * 상품 저장
