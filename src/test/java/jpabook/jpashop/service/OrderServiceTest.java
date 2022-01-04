@@ -52,7 +52,6 @@ public class OrderServiceTest {
         //given
         Member member = createMember();
         Item item = createBook("SpringBook", 10000, 10);
-        System.out.println("수량 " + item.getStockQuantity());
 
         int orderCount = 11;
 
@@ -84,9 +83,11 @@ public class OrderServiceTest {
 
     private Member createMember() {
         Member member = new Member();
+
         member.setName("jaemin");
         member.setAddress(new Address("서울", "한강로", "123-123"));
         em.persist(member);
+
         return member;
     }
 
@@ -96,8 +97,8 @@ public class OrderServiceTest {
         book.setName(name);
         book.setPrice(price);
         book.setStockQuantity(stockQuantity);
-
         em.persist(book);
+
         return book;
     }
 }
