@@ -11,6 +11,7 @@ import javax.persistence.*;
 import static javax.persistence.FetchType.*;
 
 @Entity
+@Table(name = "order_item")
 @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED) //다른 곳에서 createOrder를 제외하고 객체생성을 방지(코드 통일성)
 public class OrderItem {

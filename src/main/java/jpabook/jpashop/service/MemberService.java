@@ -14,6 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor //final 변수들로 생성자 만듬
 public class MemberService {
 
+    // @Autowired로 필드 주입대신 생성자로 주입을 권장 -> 하지만 이마저도 final로 대체하여 @RequiredArgsConstructor 애너테이션으로 대체 가능
     private final MemberRepository memberRepository;
 
     /**
@@ -34,7 +35,7 @@ public class MemberService {
 
     private void validateDuplicateMember(Member member) {
         List<Member> findMembers = memberRepository.findByName(member.getName());
-        if(!findMembers.isEmpty() ) {
+        if (!findMembers.isEmpty()) {
             System.out.println("==============================================테스트==============================================");
             throw new IllegalStateException("이미 존재하는 회원입니다.");
         }

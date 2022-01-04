@@ -11,8 +11,8 @@
 //
 //import static org.junit.Assert.*;
 //
-//@RunWith(SpringRunner.class)
-//@SpringBootTest
+//@RunWith(SpringRunner.class) // spring에 필요한 annotation을 사용
+//@SpringBootTest  // db테스트 가능
 //public class MemberRepositoryTest {
 //
 //    @Autowired MemberRepository memberRepository;

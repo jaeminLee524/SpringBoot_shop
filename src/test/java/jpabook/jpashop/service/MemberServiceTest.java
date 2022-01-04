@@ -13,9 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.Assert.*;
 
-@RunWith(SpringRunner.class)
+@RunWith(SpringRunner.class) //스프링과 테스트 통합
 @SpringBootTest //springBoot를 띄운상태에서 실행, 해당 annotation이 없으면 @Autowired와 같은 애너테이션이 동작 x
-@Transactional
+@Transactional //각 테스트마다 트랜잭션
 public class MemberServiceTest {
 
     @Autowired private MemberService memberService;
@@ -46,6 +46,7 @@ public class MemberServiceTest {
 
         //when
         memberService.join(member1);
+        //supplier
         IllegalStateException e = assertThrows(IllegalStateException.class, () -> memberService.join(member2));
         //then
         Assertions.assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
