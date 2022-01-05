@@ -81,6 +81,7 @@ public class OrderServiceTest {
         assertEquals("주문 취소시 상태는 CANCEL", OrderStatus.CANCEL, getOrder.getStatus());
     }
 
+    //==원활한 테스트를 위한 메서드 추출==//
     private Member createMember() {
         Member member = new Member();
 
