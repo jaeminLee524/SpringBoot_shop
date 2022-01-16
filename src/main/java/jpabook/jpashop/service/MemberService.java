@@ -21,7 +21,7 @@ public class MemberService {
      * 회원가입
      */
     @Transactional
-    public Long join(Member member) {
+    public Long join(Member member) { //member { name : "jaemin", aeg : 27 }
         // 중복 회원 체크
         validateDuplicateMember(member);
 
@@ -53,5 +53,12 @@ public class MemberService {
      */
     public Member findOne(Long id) {
         return memberRepository.findOne(id);
+    }
+
+    @Transactional
+    public void update(Long id, String name) {
+        Member findMember = memberRepository.findOne(id);
+        // 트랜잭션이 끝나고 커밋되는 시점에 JPA가 변경감지 실행을 한다
+        findMember.setName(name);
     }
 }
