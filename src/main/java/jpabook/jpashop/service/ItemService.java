@@ -36,4 +36,17 @@ public class ItemService {
     public Item findOne(Long itemId) {
         return itemRepository.findOne(itemId);
     }
+
+    /**
+     * 영속성 컨텍스트가 자동 변경
+     */
+    @Transactional
+    public void updateItem(Long id, String name, int price) {
+        //영속성 데이터를 찾아옴
+        Item item = itemRepository.findOne(id);
+
+        //영속성 데이터에 셋팅
+        item.setName(name);
+        item.setPrice(price);
+    }
 }
