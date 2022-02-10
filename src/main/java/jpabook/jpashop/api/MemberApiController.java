@@ -22,12 +22,23 @@ public class MemberApiController {
     private final MemberService memberService;
 
     /**
-     * 회원조회
+     * 회원조회 v1
+     */
+    @GetMapping("/v1/members")
+    public List<Member> memberV1() {
+        return memberService.findMembers();
+    }
+
+    /**
+     * 회원조회 v2
+     * 유연성을 위한 Result 클래스 생성
      */
     @GetMapping("/members")
     public Result findMembers() {
         List<Member> findMembers = memberService.findMembers();
-        List<MemberDto> collect = findMembers.stream().map(m -> new MemberDto(m.getName())).collect(Collectors.toList());
+        List<MemberDto> collect = findMembers.stream()
+                .map(m -> new MemberDto(m.getName()))
+                .collect(Collectors.toList());
 
         return new Result(collect);
     }
@@ -36,6 +47,10 @@ public class MemberApiController {
     @AllArgsConstructor
     static class Result<T> {
         private T data;
+
+        public void set(T data) {
+            this.data = data;
+        }
     }
 
     @Data
@@ -44,11 +59,22 @@ public class MemberApiController {
         private String name;
     }
 
+
     /**
-     * 회원가입
-     * request로 별도 DTO를 받는다
+     * 회원가입 v1
+     * 취약점 존재 계층 분리가 되어있지 않음
      */
-    @PostMapping("/members")
+    @PostMapping("/v1/members")
+    public CreateMemberResponse saveMember1(@RequestBody @Valid Member member) {
+        Long id = memberService.join(member);
+        return new CreateMemberResponse(id);
+    }
+
+    /**
+     * 회원가입 v2
+     * request로 별도 DTO를 받는다, dto를 통해 api스펙을 확인할 수 있음
+     */
+    @PostMapping("/v1/members")
     public CreateMemberResponse saveMemberV2(@RequestBody @Valid CreateMemberRequest request) {
 
         Member member = new Member();
@@ -58,7 +84,10 @@ public class MemberApiController {
         return new CreateMemberResponse(id);
     }
 
-    @PutMapping("/members/{id}")
+    /**
+     * 회원정보 수정
+     */
+    @PutMapping("/v2/members/{id}")
     public UpdateMemberResponse updateMemberV2(@PathVariable Long id, @RequestBody @Valid UpdateMemberRequest request) {
         log.info("id, request : {}", request, id);
         memberService.update(id, request.getName());
