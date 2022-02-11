@@ -56,6 +56,7 @@ public class InitDb {
             em.persist(order);
         }
 
+        //중복 코드 제거를 위해
         private Member createMember(String name, String city, String street,
                                     String zipcode) {
             Member member = new Member();
