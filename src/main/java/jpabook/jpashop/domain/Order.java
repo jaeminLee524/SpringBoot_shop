@@ -1,5 +1,6 @@
 package jpabook.jpashop.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,15 +30,15 @@ public class Order {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
+    //1:1관계에서 참조가 많은 곳이 주인
     @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "delivery_id")
-    //1:1관계에서 참조가 많은 쪽에 주인관계 형성
     private Delivery delivery;
 
     private LocalDateTime orderDate; //주문시간
 
     @Enumerated(EnumType.STRING)
-    private OrderStatus status; //주문상태[ORDER, CANCEL]
+    private OrderStatus status; //주문상태 [ORDER, CANCEL]
 
     //==연관관계 메서드==// => 컨트롤하는 곳에 위치하는게 좋음
     // 양뱡향일 경우 사용
