@@ -74,7 +74,7 @@ public class MemberApiController {
      * 회원가입 v2
      * request로 별도 DTO를 받는다, dto를 통해 api스펙을 확인할 수 있음
      */
-    @PostMapping("/v1/members")
+    @PostMapping("/v2/members")
     public CreateMemberResponse saveMemberV2(@RequestBody @Valid CreateMemberRequest request) {
 
         Member member = new Member();
