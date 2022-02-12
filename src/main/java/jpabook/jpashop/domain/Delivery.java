@@ -1,5 +1,6 @@
 package jpabook.jpashop.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,13 +10,14 @@ import static javax.persistence.FetchType.*;
 
 @Entity
 @Getter @Setter
-public class Delivery {
+public class  Delivery {
 
     @Id @GeneratedValue
     @Column(name = "delivery_id")
     private Long id;
 
     @OneToOne(mappedBy = "delivery", fetch = LAZY)
+    @JsonIgnore
     private Order order;
 
     @Embedded

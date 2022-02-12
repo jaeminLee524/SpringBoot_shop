@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
-public class OrderSimpleApiController {
+public class OrderSimpleApiController { // Lazy로딩과 조회 성능 최적화
 
     private final OrderRepository orderRepository;
     private final OrderSimpleQueryRepository orderSimpleQueryRepository;
