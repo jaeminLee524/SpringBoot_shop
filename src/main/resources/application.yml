@@ -12,11 +12,17 @@ spring:
       hibernate:
 #        show_sql: true
         format_sql: true
+        default_batch_fetch_size: 1000 #최적화 옵션
+    #OSIV를 끔 => 지연로딩 코드를 트랜잭션 안에서 처리해야 함
+    open-in-view: true #false
 
-  output:
-      ansi:
-        enabled: always
+output:
+    ansi:
+      enabled: always
 
 logging:
   level:
     org.hibernate.SQL: debug
+
+server:
+  port: 8081
