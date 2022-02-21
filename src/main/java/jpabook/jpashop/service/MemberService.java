@@ -52,12 +52,12 @@ public class MemberService {
      * 회원 한명 조회
      */
     public Member findOne(Long id) {
-        return memberRepository.findOne(id);
+        return memberRepository.findById(id).get();
     }
 
     @Transactional
     public void update(Long id, String name) {
-        Member findMember = memberRepository.findOne(id);
+        Member findMember = memberRepository.findById(id).get();
         // 트랜잭션이 끝나고 커밋되는 시점에 JPA가 변경감지 실행을 한다
         findMember.setName(name);
     }
